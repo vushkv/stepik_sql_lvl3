@@ -1,0 +1,10 @@
+Задание
+Вывести студентов, которые сдавали дисциплину «Основы баз данных», указать дату попытки и результат. Информацию вывести по убыванию результатов тестирования.
+
+Решение:
+SELECT name_student, date_attempt, result
+FROM student
+JOIN attempt ON attempt.student_id = student.student_id
+JOIN subject ON subject.subject_id = attempt.subject_id
+WHERE attempt.subject_id = 2
+ORDER BY result DESC;

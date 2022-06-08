@@ -1,0 +1,9 @@
+Задание
+Вывести вопросы, которые были включены в тест для Семенова Ивана по дисциплине «Основы SQL» 2020-05-17  (значение attempt_id для этой попытки равно 7). Указать, какой ответ дал студент и правильный он или нет (вывести Верно или Неверно). В результат включить вопрос, ответ и вычисляемый столбец  Результат.
+
+Решение:
+SELECT question.name_question, answer.name_answer, IF(answer.is_correct<>0, 'Верно', 'Неверно') AS Результат 
+FROM answer
+JOIN testing USING (answer_id)
+JOIN question ON testing.question_id = question.question_id
+WHERE attempt_id = 7;

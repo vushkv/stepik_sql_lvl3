@@ -1,0 +1,12 @@
+Задание
+Вывести абитуриентов, которые хотят поступать на образовательную программу «Мехатроника и робототехника» в отсортированном по фамилиям виде.
+
+Решение:
+SELECT name_enrollee 
+FROM enrollee 
+WHERE enrollee_id IN (SELECT enrollee_id 
+                      FROM program_enrollee 
+                      WHERE program_id IN (SELECT program_id 
+                                           FROM program 
+                                           WHERE name_program = 'Мехатроника и робототехника'))
+ORDER BY name_enrollee;

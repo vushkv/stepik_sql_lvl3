@@ -1,0 +1,14 @@
+Задание
+Если студент совершал несколько попыток по одной и той же дисциплине, то вывести разницу в днях между первой и последней попыткой. В результат включить фамилию и имя студента, название дисциплины и вычисляемый столбец Интервал. Информацию вывести по возрастанию разницы. Студентов, сделавших одну попытку по дисциплине, не учитывать. 
+
+Решение:
+SELECT student.name_student, a.name_subject, DATEDIFF(a.max_date, a.min_date) AS Интервал
+FROM (SELECT student.student_id, subject.name_subject, max(attempt.date_attempt) AS max_date, min(attempt.date_attempt) AS min_date
+      FROM subject 
+      JOIN attempt ON attempt.subject_id = subject.subject_id
+      JOIN student ON student.student_id = attempt.student_id
+      GROUP BY student.student_id, subject.name_subject
+      HAVING max(attempt.date_attempt) <> min(attempt.date_attempt)
+      ) AS a
+JOIN student ON student.student_id = a.student_id
+ORDER BY Интервал;
